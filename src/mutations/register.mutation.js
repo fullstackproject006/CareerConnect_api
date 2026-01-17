@@ -1,9 +1,11 @@
 import {
   GraphQLInt,
-  GraphQLString
+  GraphQLString,
+  GraphQLNonNull
 } from "graphql";
 
 import db from '../../models/index.js';
+import bcrypt from "bcrypt";
 import UserRequestType from "../types/userRequestType.js";
 import { generateAccessToken } from "../jwtAuth/jwt.js";
 const { User, Profile } = db;
@@ -13,8 +15,8 @@ const registerMutation = {
     type: UserRequestType,
     args: {
       name: { type: GraphQLString },
-      password: { type: GraphQLString },
-      email: { type: GraphQLString },
+      password: { type: new GraphQLNonNull(GraphQLString) },
+      email: { type: new GraphQLNonNull(GraphQLString) },
       gender: { type: GraphQLString },
       userType: { type: GraphQLInt },
     },
@@ -33,6 +35,8 @@ const registerMutation = {
             }
         }
 
+        const hassPass = await bcrypt.hash(password, 10);
+
         const user = await User.create({
             email: email,
             gender: gender,
@@ -41,7 +45,7 @@ const registerMutation = {
 
         await Profile.create({
             name: name,
-            password: password,
+            password: hassPass,
             profileId: user.id ?? ""
         });
         const token = await generateAccessToken({ id: user.id, email: email, userType: userType });
