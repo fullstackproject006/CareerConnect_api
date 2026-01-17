@@ -6,7 +6,7 @@ import { expressMiddleware } from "@apollo/server/express4";
 import { schema } from "./schema.js";
 import { sequelize } from "./db/index.js";
 import db from '../models/index.js';
-const { User } = db;
+const { User, Profile } = db;
 
 
 const app = express();
@@ -26,14 +26,21 @@ try {
 
 app.get("/test-db", async (req, res) => {
   const user = await User.create({
-    email: "test@example.com",
+    email: "test1@example.com",
     gender: "male",
     userType: 1,
   });
+  const profile = await Profile.create({
+     name: "",
+     password: "siddhu@006",
+     profileId: user.id ?? ""
+  });
   console.log(
-    "User created",
-    user
+    "User created", 
+    user.id,
+    profile.id
   )
+  res.status(200).send("user created", user);
 });
 
 const server = new ApolloServer({

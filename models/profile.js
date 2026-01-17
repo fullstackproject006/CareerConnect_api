@@ -1,8 +1,8 @@
 "use strict";
 
 export default (sequelize, DataTypes) => {
-  const User = sequelize.define(
-    "User",
+  const Profile = sequelize.define(
+    "Profile",
     {
       id: {
         type: DataTypes.UUID,
@@ -10,24 +10,24 @@ export default (sequelize, DataTypes) => {
         primaryKey: true,
         allowNull: false,
       },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      gender: {
+      name: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      userType: {
-        type: DataTypes.INTEGER,
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      profileId: {
+        type: DataTypes.UUID,
         allowNull: false,
       },
     },
     {
-      tableName: "users",
-      timestamps: true,
+      tableName: "users_profile",
+      timestamps: false
     }
   );
 
-  return User;
+  return Profile;
 };

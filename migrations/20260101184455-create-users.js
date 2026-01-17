@@ -11,11 +11,10 @@ export async function up(queryInterface, Sequelize) {
     email: {
       type: Sequelize.DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     gender: {
       type: Sequelize.DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     userType: {
       type: Sequelize.DataTypes.INTEGER,

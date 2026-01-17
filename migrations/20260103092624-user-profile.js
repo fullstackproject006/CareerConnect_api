@@ -10,7 +10,7 @@ export async function up(queryInterface, Sequelize) {
     },
     name: {
       type: Sequelize.DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     password: {
       type: Sequelize.DataTypes.STRING,
@@ -18,8 +18,7 @@ export async function up(queryInterface, Sequelize) {
     },
     profileId: {
       type: Sequelize.DataTypes.UUID,
-      allowNull: true,
-      unique: true
+      allowNull: false
     }
   });
 }
