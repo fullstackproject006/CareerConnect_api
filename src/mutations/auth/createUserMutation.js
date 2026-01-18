@@ -4,10 +4,10 @@ import {
   GraphQLNonNull
 } from "graphql";
 
-import db from '../../models/index.js';
+import db from '../../../models/index.js';
 import bcrypt from "bcrypt";
-import UserRequestType from "../types/userRequestType.js";
-import { generateAccessToken } from "../jwtAuth/jwt.js";
+import UserRequestType from "../../types/userRequestType.js";
+import { generateAccessToken } from "../../jwtAuth/jwt.js";
 const { User, Profile } = db;
 
 const registerMutation = {

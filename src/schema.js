@@ -3,7 +3,8 @@ import {
   GraphQLObjectType as ObjectType,
   GraphQLString as StringType,
 } from "graphql";
-import registerMutation from "./mutations/register.mutation.js";
+import registerMutation from "./mutations/auth/createUserMutation.js";
+import loginMutation from "./mutations/auth/loginMutation.js";
 
 const Query = new ObjectType({
   name: "Query",
@@ -18,7 +19,8 @@ const Query = new ObjectType({
 const Mutation = new ObjectType({
   name: "Mutation",
   fields: () => ({
-    ...registerMutation
+    ...registerMutation,
+    ...loginMutation
   }),
 });
 
