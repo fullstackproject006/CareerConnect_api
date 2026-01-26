@@ -4,8 +4,6 @@ import bcrypt from "bcrypt";
 import { generateAccessToken } from "../../jwtAuth/jwt.js";
 import UserRequestType from "../../types/userRequestType.js";
 
-const { User, Profile } = db;
-
 const loginMutation = {
     login : {
         type: UserRequestType,
@@ -36,16 +34,16 @@ const loginMutation = {
 
             if (!results) {
                 return {
-                    "status": 400,
-                    "errorMessage": "User does not exist"
+                    status: 400,
+                    errorMessage: "User does not exist"
                 }
             }
             const passwordMatch = await bcrypt.compare(password, results.password);
 
             if (!passwordMatch) {
                 return {
-                    "status": 400,
-                    "errorMessage": "Invalid password"
+                    status: 400,
+                    errorMessage: "Invalid password"
                 }
             }
 

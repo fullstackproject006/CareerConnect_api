@@ -30,8 +30,8 @@ const registerMutation = {
 
         if (existingUser) {
             return {
-                "status": 400,
-                "errorMessage": "User already exists"
+                status: 400,
+                errorMessage: "User already exists"
             }
         }
 
